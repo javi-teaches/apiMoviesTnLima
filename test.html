@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		let params = new URLSearchParams(location.search);
+
+		let userToken = params.get('token');
+		
+		fetch('http://localhost:3000/api/movies/', {
+				method: 'POST',
+				body: JSON.stringify({
+					title: 'Desde HTML plano',
+					release_date: '2020-01-23',
+					genre_id: '3',
+					token: userToken
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(res => res.json())
+				.then(data => console.log(data))
+				.catch(error => console.log(error))
+
+	</script>
+
+</body>
+</html>
